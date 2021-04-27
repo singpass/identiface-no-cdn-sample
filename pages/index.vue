@@ -91,7 +91,7 @@
                                                 <p class="has-text-grey-dark">By selecting "Begin Scan", you are allowing us to retrieve your data on the <a href="https://www.singpass.gov.sg/singpass/common/termsofuse">Terms of Use</a><br></p>
                                             </div>
                                             <div slot="button" class="m-1">
-                                                <b-button class="is-primary">Begin Scan</b-button>
+                                                <b-button class="is-primary" id="allowedscan">Begin Scan</b-button>
                                             </div>
                                             <!-- User aborted the verification process -->
                                             <div slot="interrupted" class="m-1">
@@ -115,7 +115,7 @@
                                             <!-- Errors -->
                                             <div slot="error" class="m-1">
                                                 <p class="has-text-grey-dark">Oh no, something went wrong. Please try again.<br></p>
-                                                <a class="button is-warning" href="/sample-app/transactions">Retry</a>
+                                                <a class="button is-warning" href="/index.html">Retry</a>
                                             </div>
                                         </div>
                                     </sp-face>
@@ -215,6 +215,8 @@ export default {
                     case "ready":
                         x[0].setAttribute("value", 10)
                         this.alerts("Ready to begin face verification", "is-success", 3000)
+                        document.getElementById("allowedscan").click()
+                        document.getElementById('allowedscan').style.visibility = 'hidden';
                         break
                     case "unsupported":
                         this.alerts("Not supported!", "is-danger", 5000)
@@ -247,9 +249,8 @@ export default {
                     case "feedback":
                         this.alerts(event.detail.reason, "is-info", 5000)
                     default:
-                        // console.log("sp-face" + event.detail.type + " " + event.type)
-                        // document.getElementById("allowedcam").click()
-                        // document.getElementById('allowedcam').style.visibility = 'hidden';
+                        document.getElementById("allowedscan").click()
+                        document.getElementById('allowedscan').style.visibility = 'hidden';
                 }
             }
         }
